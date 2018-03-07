@@ -49,7 +49,11 @@ $("#buttons-appear-here").on("click", "button", function() {
             p.text("rating: " + results[i].rating);
             // Made an image tag with jQuery and stored it in a variable named termImage.
             var termImage = $("<img>");
-            // Set the image's src to results[i]'s fixed_height_still.url so that it displays not playing when first loaded
+            //assigns urls to still or animate
+            termImage.attr("data-still", results[i].images.fixed_height_still.url);
+            termImage.attr("data-state", "still");
+            termImage.attr("data-animate", results[i].images.fixed_height.url);
+            // Set the image's src to data-still so that it displays still when first loaded
             termImage.attr("src", results[i].images.fixed_height_still.url);
             // appends the term they clicked to each related gif displayed
             termDiv.append("<h3>" + term + "</h3>");
@@ -61,4 +65,17 @@ $("#buttons-appear-here").on("click", "button", function() {
             $("#gifs-appear-here").prepend(termDiv);
         }
         });
+});
+
+$("#gifs-appear-here").on("click", "img", function (){
+    var state = $(this).attr("data-state");
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this). attr("data-state", "animate");
+    }
+    if (state === "animate") {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+    }
+
 });
