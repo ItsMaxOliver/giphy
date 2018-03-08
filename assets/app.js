@@ -15,7 +15,7 @@ function renderButtons() {
     }
 };
 
-// This function handles events where the add button is clicked
+// This function handles events that the add button is clicked or enter is typed
 $("#add-button").on("click", function(event) {
     // event.preventDefault() prevents submit button from trying to send a form
     event.preventDefault();
